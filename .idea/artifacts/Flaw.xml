@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Flaw">
+    <output-path>$PROJECT_DIR$/out/artifacts/Flaw</output-path>
+    <root id="archive" name="Flaw.jar">
+      <element id="module-output" name="Flaw" />
+    </root>
+  </artifact>
+</component>
