@@ -52,12 +52,13 @@ public class Level3 extends JFrame implements MouseListener {
     private JList <String> comboList;
     private JScrollPane scrollPane;
 
-    private int score = 0;
+    private int comboNum = 0;
+    private int totalScore = 0;
     private List<boolean[]> validCombinations = new ArrayList<>();
     private boolean[] currentCombo = new boolean[4];
 
     public static void main(String[] args) {
-        new Level3(new Point());
+        new Level3(new Point(), 0);
     }
 
     public String comboToString (boolean[] combo) {
@@ -119,15 +120,24 @@ public class Level3 extends JFrame implements MouseListener {
             }
             if (flag) {
                 validCombinations.add(currentCombo.clone());
-                score++;
-                scoreLabel.setText("Total score: " + score*100);
-                listModel.addElement(score+". "+comboToString(currentCombo.clone()));
+                comboNum++;
+                totalScore+= 100;
+                scoreLabel.setText("Total score: " + totalScore);
+                listModel.addElement(comboNum +". "+comboToString(currentCombo.clone()));
+
+                if(comboNum ==4) {
+                    JOptionPane.showMessageDialog(null,"       Level 3 completed!","Congratulations!", 1);
+                    Point p = this.getLocation();
+                    new MainFrame(p);
+                    this.dispose();
+                }
             }
         }
     }
 
-    Level3(Point p) {
+    Level3(Point p, int totalScore) {
         super("Flaw");
+        this.totalScore = totalScore;
         setBounds(100, 100, 900, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -189,7 +199,7 @@ public class Level3 extends JFrame implements MouseListener {
         outFinalLabel2.setBounds(790, 351, 30, 30);
         getContentPane().add(outFinalLabel2);
 
-        scoreLabel = new JLabel("Total score: "+ score*100);
+        scoreLabel = new JLabel("Total score: "+ totalScore);
         scoreLabel.setBounds(720, 30, 100, 30);
         getContentPane().add(scoreLabel);
 

@@ -44,7 +44,8 @@ public class Level1 extends JFrame implements MouseListener {
     private JList <String> comboList;
     private JScrollPane scrollPane;
 
-    private int score = 0;
+    private int comboNum = 0;
+    private int totalScore = 0;
     private List<boolean[]> validCombinations = new ArrayList<>();
     private boolean[] currentCombo = new boolean[4];
 
@@ -100,14 +101,15 @@ public class Level1 extends JFrame implements MouseListener {
             }
             if (flag) {
                 validCombinations.add(currentCombo.clone());
-                score++;
-                scoreLabel.setText("Total score: " + score*100);
-                listModel.addElement(score+". "+comboToString(currentCombo.clone()));
+                comboNum++;
+                totalScore+= 100;
+                scoreLabel.setText("Total score: " + totalScore);
+                listModel.addElement(comboNum +". "+comboToString(currentCombo.clone()));
 
-                if(score==6) {
+                if(comboNum ==6) {
                     JOptionPane.showMessageDialog(null,"       Level 1 completed!","Congratulations!", 1);
                     Point p = this.getLocation();
-                    new Level2(p);
+                    new Level2(p, totalScore);
                     this.dispose();
                 }
 
@@ -166,7 +168,7 @@ public class Level1 extends JFrame implements MouseListener {
         out3Label.setBounds(780, 274, 30, 30);
         getContentPane().add(out3Label);
 
-        scoreLabel = new JLabel("Total score: "+ score*100);
+        scoreLabel = new JLabel("Total score: "+ totalScore);
         scoreLabel.setBounds(720, 30, 100, 30);
         getContentPane().add(scoreLabel);
 

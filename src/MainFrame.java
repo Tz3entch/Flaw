@@ -56,6 +56,11 @@ public class MainFrame extends JFrame implements MouseListener {
 
         getContentPane().add(tutorial, c);
 
+        title = new JLabel("FLAW");
+        title.setFont(new Font("helevtica",Font.ROMAN_BASELINE,80));
+        title.setForeground(Color.BLUE);
+        getContentPane().add(title);
+
 
         //pack();
 
