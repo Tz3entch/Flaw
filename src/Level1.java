@@ -3,15 +3,14 @@ import logic.GreenBlock;
 import logic.YellowBlock;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by ������ on 22.03.2016.
- */
+
 public class Level1 extends JFrame implements MouseListener {
 
 
@@ -50,7 +49,7 @@ public class Level1 extends JFrame implements MouseListener {
     private boolean[] currentCombo = new boolean[4];
 
     public static void main(String[] args) {
-        new Level1();
+        new Level1(new Point());
     }
 
     public String comboToString (boolean[] combo) {
@@ -76,7 +75,7 @@ public class Level1 extends JFrame implements MouseListener {
         if (b) {
             return circleGreen;
         }
-        return starRed;
+        return star;
     }
 
     private void setOutputIcons () {
@@ -104,16 +103,25 @@ public class Level1 extends JFrame implements MouseListener {
                 score++;
                 scoreLabel.setText("Total score: " + score*100);
                 listModel.addElement(score+". "+comboToString(currentCombo.clone()));
+
+                if(score==6) {
+                    JOptionPane.showMessageDialog(null,"       Level 1 completed!","Congratulations!", 1);
+                    Point p = this.getLocation();
+                    new Level2(p);
+                    this.dispose();
+                }
+
             }
         }
     }
 
-    Level1() {
+    Level1(Point p) {
         super("Flaw");
         setBounds(100, 100, 900, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
+        setLocation(p);
 
         setContentPane(new JLabel(new ImageIcon(Level1.class.getResource("/images/level1.png"))));
 

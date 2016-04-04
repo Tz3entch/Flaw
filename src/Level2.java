@@ -4,6 +4,7 @@ import logic.RedBlock;
 import logic.YellowBlock;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class Level2 extends JFrame implements MouseListener {
     private boolean[] currentCombo = new boolean[4];
 
     public static void main(String[] args) {
-        new Level2();
+        new Level2(new Point());
     }
 
     public String comboToString (boolean[] combo) {
@@ -112,16 +113,24 @@ public class Level2 extends JFrame implements MouseListener {
                 score++;
                 scoreLabel.setText("Total score: " + score*100);
                 listModel.addElement(score+". "+comboToString(currentCombo.clone()));
+
+                if(score==3) {
+                    JOptionPane.showMessageDialog(null,"       Level 2 completed!","Congratulations!", 1);
+                    Point p = this.getLocation();
+                    new Level3(p);
+                    this.dispose();
+                }
             }
         }
     }
 
-    Level2() {
+    Level2(Point p) {
         super("Flaw");
         setBounds(100, 100, 900, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
+        setLocation(p);
 
         setContentPane(new JLabel(new ImageIcon(Level2.class.getResource("/images/level2.png"))));
 

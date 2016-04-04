@@ -1,6 +1,7 @@
 import logic.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class Level3 extends JFrame implements MouseListener {
     private boolean[] currentCombo = new boolean[4];
 
     public static void main(String[] args) {
-        new Level3();
+        new Level3(new Point());
     }
 
     public String comboToString (boolean[] combo) {
@@ -125,12 +126,13 @@ public class Level3 extends JFrame implements MouseListener {
         }
     }
 
-    Level3() {
+    Level3(Point p) {
         super("Flaw");
         setBounds(100, 100, 900, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
+        setLocation(p);
 
         setContentPane(new JLabel(new ImageIcon(Level3.class.getResource("/images/level3.png"))));
 
