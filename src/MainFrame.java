@@ -13,6 +13,7 @@ public class MainFrame extends JFrame implements MouseListener {
 
     private JButton play;
     private JButton tutorial;
+    private JButton exit;
     private JLabel title;
 
 
@@ -28,7 +29,13 @@ public class MainFrame extends JFrame implements MouseListener {
         c.fill = GridBagConstraints.HORIZONTAL;
 
 
-
+        title = new JLabel("FLAW");
+        title.setFont(new Font("helevtica",Font.ROMAN_BASELINE,80));
+        title.setForeground(Color.BLUE);
+        c.anchor = GridBagConstraints.PAGE_END;
+        c.insets = new Insets(0, 0, 30, 0);
+        c.gridy = 1;
+        getContentPane().add(title, c );
 
         play = new JButton("Play");
         play.addActionListener(new ActionListener() {
@@ -39,12 +46,11 @@ public class MainFrame extends JFrame implements MouseListener {
                 dispose();
             }
         });
-        c.insets = new Insets(0, 5, 0, 5);
-
+        c.insets = new Insets(0, 0, 10, 0);
+        c.gridy = 2;
         getContentPane().add(play, c);
 
         tutorial = new JButton("Tutorial");
-
         tutorial.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -53,13 +59,22 @@ public class MainFrame extends JFrame implements MouseListener {
                 dispose();
             }
         });
-
+        c.insets = new Insets(0, 0, 10, 0);
+        c.gridy = 3;
         getContentPane().add(tutorial, c);
 
-        title = new JLabel("FLAW");
-        title.setFont(new Font("helevtica",Font.ROMAN_BASELINE,80));
-        title.setForeground(Color.BLUE);
-        getContentPane().add(title);
+        exit = new JButton("Exit");
+
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        c.insets = new Insets(0, 0, 50, 0);
+        c.gridy = 4;
+        getContentPane().add(exit, c);
+
 
 
         //pack();

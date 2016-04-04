@@ -88,7 +88,7 @@ public class Level2 extends JFrame implements MouseListener {
     }
 
     private void setOutputIcons () {
-        out1 = blueBlock.combine(!in11, in12);
+        out1 = blueBlock.combine(in11, in12);
         out1Label.setIcon(returnIcon(out1));
         out2 = blueBlock.combine(in21, in22);
         out2Label.setIcon(returnIcon(out2));
@@ -116,7 +116,7 @@ public class Level2 extends JFrame implements MouseListener {
                 scoreLabel.setText("Total score: " + totalScore);
                 listModel.addElement(comboNum +". "+comboToString(currentCombo.clone()));
 
-                if(comboNum ==3) {
+                if(comboNum ==4) {
                     JOptionPane.showMessageDialog(null,"       Level 2 completed!","Congratulations!", 1);
                     Point p = this.getLocation();
                     new Level3(p, totalScore);
@@ -164,7 +164,7 @@ public class Level2 extends JFrame implements MouseListener {
         in22Label.addMouseListener(this);
         getContentPane().add(in22Label);
 
-        out1 = blueBlock.combine(!in11, in12);
+        out1 = blueBlock.combine(in11, in12);
         out1Label = new JLabel(returnIcon(out1));
         out1Label.setBounds(420, 85, 30, 30);
         getContentPane().add(out1Label);
