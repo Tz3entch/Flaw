@@ -11,9 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by ������ on 22.03.2016.
- */
 public class Level2 extends JFrame implements MouseListener {
 
 
