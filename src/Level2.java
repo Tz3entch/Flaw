@@ -81,7 +81,7 @@ public class Level2 extends JFrame implements MouseListener {
 
     public ImageIcon returnFinalIcon (boolean b) {
         if (b) {
-            return circle;
+            return circleRed;
         }
         return starGreen;
     }
@@ -146,7 +146,7 @@ public class Level2 extends JFrame implements MouseListener {
         in11Label.addMouseListener(this);
         getContentPane().add(in11Label);
 
-        in12Label = new JLabel(returnIcon(in12));
+        in12Label = new JLabel(returnFinalIcon(in12));
         in12Label.setBounds(80, 145, 30, 30);
         in12Label.addMouseListener(this);
         getContentPane().add(in12Label);

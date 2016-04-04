@@ -75,7 +75,7 @@ public class Level1 extends JFrame implements MouseListener {
         if (b) {
             return circleGreen;
         }
-        return star;
+        return starRed;
     }
 
     private void setOutputIcons () {

@@ -81,7 +81,7 @@ public class Level3 extends JFrame implements MouseListener {
 
     public ImageIcon returnFinalIcon (boolean b) {
         if (b) {
-            return circle;
+            return circleRed;
         }
         return starGreen;
     }
@@ -90,7 +90,7 @@ public class Level3 extends JFrame implements MouseListener {
         if (b) {
             return circleGreen;
         }
-        return star;
+        return starRed;
     }
 
     private void setOutputIcons () {
@@ -100,9 +100,9 @@ public class Level3 extends JFrame implements MouseListener {
         out2Label.setIcon(returnFinalIcon(!out2));
         out3 = blueBlock.combine(in22, in32);
         out3Label.setIcon(returnIcon(out3));
-        outFinal = greenBlock.combine(out1, out2);
+        outFinal = greenBlock.combine(out1, !out2);
         outFinalLabel.setIcon(returnFinalIcon(outFinal));
-        outFinal2 = orangeBlock.combine(out2, out3);
+        outFinal2 = orangeBlock.combine(!out2, out3);
         outFinalLabel2.setIcon(returnFinalIcon2(outFinal2));
         currentCombo[0] = in11;
         currentCombo[1] = in12;
@@ -163,28 +163,28 @@ public class Level3 extends JFrame implements MouseListener {
         in32Label.addMouseListener(this);
         getContentPane().add(in32Label);
 
-        out1 = blueBlock.combine(!in11, in12);
+        out1 = redBlock.combine(in11, in12);
         out1Label = new JLabel(returnIcon(out1));
         out1Label.setBounds(425, 85, 30, 30);
         getContentPane().add(out1Label);
 
-        out2 = blueBlock.combine(in22, in32);
-        out2Label = new JLabel(returnIcon(out2));
+        out2 = redBlock.combine(in12, in22);
+        out2Label = new JLabel(returnFinalIcon(!out2));
         out2Label.setBounds(425, 250, 30, 30);
         getContentPane().add(out2Label);
 
-        out3 = redBlock.combine(in32, in12);
+        out3 = blueBlock.combine(in22, in32);
         out3Label = new JLabel(returnIcon(out3));
         out3Label.setBounds(425, 420, 30, 30);
         getContentPane().add(out3Label);
 
 
-        outFinal = greenBlock.combine(out1, out2, out3);
+        outFinal = greenBlock.combine(out1, !out2);
         outFinalLabel = new JLabel(returnFinalIcon(outFinal));
         outFinalLabel.setBounds(790, 190, 30, 30);
         getContentPane().add(outFinalLabel);
 
-        outFinal2 = orangeBlock.combine(out2, out3);
+        outFinal2 = orangeBlock.combine(!out2, out3);
         outFinalLabel2 = new JLabel(returnFinalIcon2(outFinal2));
         outFinalLabel2.setBounds(790, 351, 30, 30);
         getContentPane().add(outFinalLabel2);

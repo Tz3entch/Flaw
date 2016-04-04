@@ -16,12 +16,13 @@ public class MainFrame extends JFrame implements MouseListener {
     private JLabel title;
 
 
-    public MainFrame () {
+    public MainFrame (Point p) {
         super("Flaw");
         setBounds(100, 100, 900, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
+        setLocation(p);
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -30,8 +31,6 @@ public class MainFrame extends JFrame implements MouseListener {
 
 
         play = new JButton("Play");
-        play.setAlignmentX(Component.CENTER_ALIGNMENT);
-        play.setVerticalAlignment(SwingConstants.CENTER);
         play.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -45,9 +44,16 @@ public class MainFrame extends JFrame implements MouseListener {
         getContentPane().add(play, c);
 
         tutorial = new JButton("Tutorial");
-        tutorial.setAlignmentX(Component.CENTER_ALIGNMENT);
-        c.gridx = 50;
-        c.gridy = 0;
+
+        tutorial.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Point p = getLocation();
+                new Tutorial(p);
+                dispose();
+            }
+        });
+
         getContentPane().add(tutorial, c);
 
 
@@ -57,7 +63,7 @@ public class MainFrame extends JFrame implements MouseListener {
     }
 
     public static void main(String [] args) {
-        new MainFrame();
+        new MainFrame(new Point());
     }
 
 
