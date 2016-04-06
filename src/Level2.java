@@ -16,7 +16,6 @@ public class Level2 extends JFrame implements MouseListener {
 
     private GreenBlock greenBlock = new GreenBlock();
     private BlueBlock blueBlock = new BlueBlock();
-    private YellowBlock yellowBlock = new YellowBlock();
     private RedBlock redBlock = new RedBlock();
 
     private ImageIcon circle;
@@ -51,6 +50,8 @@ public class Level2 extends JFrame implements MouseListener {
 
     private int comboNum = 0;
     private int totalScore = 0;
+    private int failNum = 0;
+
     private List<boolean[]> validCombinations = new ArrayList<>();
     private boolean[] currentCombo = new boolean[4];
 
@@ -109,7 +110,12 @@ public class Level2 extends JFrame implements MouseListener {
             if (flag) {
                 validCombinations.add(currentCombo.clone());
                 comboNum++;
-                totalScore+= 100;
+                if (failNum!=0) {
+                    totalScore+= 100;
+                } else {
+                    totalScore+= 300;
+                }
+                failNum = 0;
                 scoreLabel.setText("Total score: " + totalScore);
                 listModel.addElement(comboNum +". "+comboToString(currentCombo.clone()));
 
@@ -119,6 +125,16 @@ public class Level2 extends JFrame implements MouseListener {
                     new Level3(p, totalScore);
                     this.dispose();
                 }
+            }
+        } else {
+            failNum++;
+            if (failNum>0) {
+                if (totalScore>50) {
+                    totalScore= totalScore - 50;
+                } else {
+                    totalScore = 0;
+                }
+                scoreLabel.setText("Total score: " + totalScore);
             }
         }
     }

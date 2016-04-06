@@ -54,6 +54,7 @@ public class Level3 extends JFrame implements MouseListener {
 
     private int comboNum = 0;
     private int totalScore = 0;
+    private int failNum;
     private List<boolean[]> validCombinations = new ArrayList<>();
     private boolean[] currentCombo = new boolean[4];
 
@@ -121,16 +122,32 @@ public class Level3 extends JFrame implements MouseListener {
             if (flag) {
                 validCombinations.add(currentCombo.clone());
                 comboNum++;
-                totalScore+= 100;
+                if (failNum!=0) {
+                    totalScore+= 100;
+                } else {
+                    totalScore+= 300;
+                }
+                failNum = 0;
                 scoreLabel.setText("Total score: " + totalScore);
                 listModel.addElement(comboNum +". "+comboToString(currentCombo.clone()));
 
                 if(comboNum ==4) {
                     JOptionPane.showMessageDialog(null,"       Level 3 completed!","Congratulations!", 1);
+                    JOptionPane.showMessageDialog(null,"       Total score: "+totalScore,"Game completed!", 1);
                     Point p = this.getLocation();
                     new MainFrame(p);
                     this.dispose();
                 }
+            }
+        } else {
+            failNum++;
+            if (failNum>0) {
+                if (totalScore>50) {
+                    totalScore= totalScore - 50;
+                } else {
+                    totalScore = 0;
+                }
+                scoreLabel.setText("Total score: " + totalScore);
             }
         }
     }

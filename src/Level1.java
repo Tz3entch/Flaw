@@ -46,6 +46,7 @@ public class Level1 extends JFrame implements MouseListener {
 
     private int comboNum = 0;
     private int totalScore = 0;
+    private int failNum = 0;
     private List<boolean[]> validCombinations = new ArrayList<>();
     private boolean[] currentCombo = new boolean[4];
 
@@ -79,7 +80,7 @@ public class Level1 extends JFrame implements MouseListener {
         return starRed;
     }
 
-    private void setOutputIcons () {
+    private void updateGameScreen() {
         out1 = blueBlock.combine(!in11, in12);
         out1Label.setIcon(returnIcon(out1));
         out2 = greenBlock.combine(in21, in22);
@@ -102,7 +103,12 @@ public class Level1 extends JFrame implements MouseListener {
             if (flag) {
                 validCombinations.add(currentCombo.clone());
                 comboNum++;
+                if (failNum!=0) {
                 totalScore+= 100;
+                } else {
+                    totalScore+= 300;
+                }
+                failNum = 0;
                 scoreLabel.setText("Total score: " + totalScore);
                 listModel.addElement(comboNum +". "+comboToString(currentCombo.clone()));
 
@@ -113,6 +119,16 @@ public class Level1 extends JFrame implements MouseListener {
                     this.dispose();
                 }
 
+            }
+        } else {
+            failNum++;
+            if (failNum>0) {
+                if (totalScore>50) {
+                totalScore= totalScore - 50;
+                } else {
+                    totalScore = 0;
+                }
+                scoreLabel.setText("Total score: " + totalScore);
             }
         }
     }
@@ -193,25 +209,25 @@ public class Level1 extends JFrame implements MouseListener {
         if ( obj == in11Label){
             in11 = !in11;
             in11Label.setIcon(returnIcon(in11));
-            setOutputIcons();
+            updateGameScreen();
         }
 
         if ( obj == in12Label){
             in12 = !in12;
             in12Label.setIcon(returnIcon(in12));
-            setOutputIcons ();
+            updateGameScreen();
         }
 
         if ( obj == in21Label){
             in21 = !in21;
             in21Label.setIcon(returnIcon(in21));
-            setOutputIcons ();
+            updateGameScreen();
         }
 
         if ( obj == in22Label){
             in22 = !in22;
             in22Label.setIcon(returnIcon(in22));
-            setOutputIcons ();
+            updateGameScreen();
 
         }
 
