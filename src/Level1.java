@@ -196,9 +196,15 @@ public class Level1 extends JFrame implements MouseListener {
        // listModel.addElement("**oo");
         getContentPane().add(scrollPane);
 
-
-
         setVisible(true);
+
+        JOptionPane.showMessageDialog(null,"<html><body><p style='width: 400px;'>"+"In this level the error is fixed and the output is fixed. The error "+
+                "here is, when we give star it considers as circle and when we give circle it will consider as star."+
+                " The player need to change the inputs  based on the block function. When the output is green the" +
+                " combination is counted and if it is red  the player need to choose the other combination."+"" +
+                "</p></body></html>","Instructions for Level 1", 1);
+
+
     }
 
 

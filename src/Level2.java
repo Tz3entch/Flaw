@@ -87,7 +87,14 @@ public class Level2 extends JFrame implements MouseListener {
 
     private void setOutputIcons () {
         out1 = blueBlock.combine(in11, in12);
-        out1Label.setIcon(returnIcon(out1));
+        out1Label.setIcon(returnFinalIcon(out1));
+        if(!in12) {
+            in21Label.setVisible(true);
+            in22Label.setVisible(true);
+            out2Label.setVisible(true);
+            out3Label.setVisible(true);
+
+        }
         out2 = blueBlock.combine(in21, in22);
         out2Label.setIcon(returnIcon(out2));
         out3 = redBlock.combine(in22, in12);
@@ -171,14 +178,16 @@ public class Level2 extends JFrame implements MouseListener {
         in21Label.setBounds(80, 240, 30, 30);
         in21Label.addMouseListener(this);
         getContentPane().add(in21Label);
+        in21Label.setVisible(false);
 
         in22Label = new JLabel(returnIcon(in22));
         in22Label.setBounds(80, 315, 30, 30);
         in22Label.addMouseListener(this);
         getContentPane().add(in22Label);
+        in22Label.setVisible(false);
 
         out1 = blueBlock.combine(in11, in12);
-        out1Label = new JLabel(returnIcon(out1));
+        out1Label = new JLabel(returnFinalIcon(out1));
         out1Label.setBounds(420, 85, 30, 30);
         getContentPane().add(out1Label);
 
@@ -186,11 +195,13 @@ public class Level2 extends JFrame implements MouseListener {
         out2Label = new JLabel(returnIcon(out2));
         out2Label.setBounds(420, 250, 30, 30);
         getContentPane().add(out2Label);
+        out2Label.setVisible(false);
 
         out3 = redBlock.combine(in22, in12);
         out3Label = new JLabel(returnIcon(out3));
         out3Label.setBounds(420, 420, 30, 30);
         getContentPane().add(out3Label);
+        out3Label.setVisible(false);
 
 
         outFinal = greenBlock.combine(out1, out2, out3);
@@ -213,6 +224,12 @@ public class Level2 extends JFrame implements MouseListener {
 
 
         setVisible(true);
+
+        JOptionPane.showMessageDialog(null,"<html><body><p style='width: 400px;'>"+"Here the error is fixed to star"+
+                " or circle at the input node of the block and the player need to place the suitable input to make"+
+                " the other inputs green and then play with the other inputs to fix the output as green. The success"+
+                " of immediate attempt will double the score and the failure will reduce the 10% of the score." +
+                "</p></body></html>","Instructions for Level 2", 1);
     }
 
 

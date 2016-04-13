@@ -28,11 +28,11 @@ public class Level3 extends JFrame implements MouseListener {
     private ImageIcon star;
 
     private boolean in11 = false;
-    private boolean in12 = false;
+    private boolean in12 = true;
     private boolean out1 = true;
     private boolean in22 = true;
     private boolean in32 = false;
-    private boolean out2 = true;
+    private boolean out2 = false;
     private boolean out3 = true;
     private boolean outFinal = true;
     private boolean outFinal2 = true;
@@ -96,21 +96,27 @@ public class Level3 extends JFrame implements MouseListener {
     }
 
     private void setOutputIcons () {
+        if (!in12 && !in22) {
+            in11Label.setVisible(true);
+            in32Label.setVisible(true);
+            out1Label.setVisible(true);
+            out3Label.setVisible(true);
+        }
         out1 = redBlock.combine(in11, in12);
         out1Label.setIcon(returnIcon(out1));
-        out2 = redBlock.combine(in12, in22);
-        out2Label.setIcon(returnFinalIcon(!out2));
+        //out2 = redBlock.combine(in12, in22);
+        //out2Label.setIcon(returnFinalIcon(!out2));
         out3 = blueBlock.combine(in22, in32);
         out3Label.setIcon(returnIcon(out3));
-        outFinal = greenBlock.combine(out1, !out2);
+        outFinal = greenBlock.combine(out1, out2);
         outFinalLabel.setIcon(returnFinalIcon(outFinal));
-        outFinal2 = orangeBlock.combine(!out2, out3);
+        outFinal2 = orangeBlock.combine(out2, out3);
         outFinalLabel2.setIcon(returnFinalIcon2(outFinal2));
         currentCombo[0] = in11;
         currentCombo[1] = in12;
         currentCombo[2] = in22;
         currentCombo[3] = in32;
-        if (out2 && (!outFinal) && outFinal2 ) {
+        if ((!in12) && (!in22) && (!outFinal) && outFinal2 ) {
             boolean flag = true;
             if (!validCombinations.isEmpty()) {
                 for (boolean[] validCombination : validCombinations) {
@@ -174,13 +180,14 @@ public class Level3 extends JFrame implements MouseListener {
         in11Label.setBounds(80, 75, 30, 30);
         in11Label.addMouseListener(this);
         getContentPane().add(in11Label);
+        in11Label.setVisible(false);
 
-        in12Label = new JLabel(returnIcon(in12));
+        in12Label = new JLabel(returnFinalIcon(in12));
         in12Label.setBounds(80, 145, 30, 30);
         in12Label.addMouseListener(this);
         getContentPane().add(in12Label);
 
-        in22Label = new JLabel(returnIcon(in22));
+        in22Label = new JLabel(returnFinalIcon(in22));
         in22Label.setBounds(80, 315, 30, 30);
         in22Label.addMouseListener(this);
         getContentPane().add(in22Label);
@@ -189,14 +196,17 @@ public class Level3 extends JFrame implements MouseListener {
         in32Label.setBounds(80, 480, 30, 30);
         in32Label.addMouseListener(this);
         getContentPane().add(in32Label);
+        in32Label.setVisible(false);
 
         out1 = redBlock.combine(in11, in12);
         out1Label = new JLabel(returnIcon(out1));
         out1Label.setBounds(425, 85, 30, 30);
         getContentPane().add(out1Label);
+        out1Label.setVisible(false);
 
-        out2 = redBlock.combine(in12, in22);
-        out2Label = new JLabel(returnFinalIcon(!out2));
+        //out2 = redBlock.combine(in12, in22);
+        out2 = false;
+        out2Label = new JLabel(new ImageIcon(Level3.class.getResource("/images/star_black.png")));
         out2Label.setBounds(425, 250, 30, 30);
         getContentPane().add(out2Label);
 
@@ -204,14 +214,15 @@ public class Level3 extends JFrame implements MouseListener {
         out3Label = new JLabel(returnIcon(out3));
         out3Label.setBounds(425, 420, 30, 30);
         getContentPane().add(out3Label);
+        out3Label.setVisible(false);
 
 
-        outFinal = greenBlock.combine(out1, !out2);
+        outFinal = greenBlock.combine(out1, out2);
         outFinalLabel = new JLabel(returnFinalIcon(outFinal));
         outFinalLabel.setBounds(790, 190, 30, 30);
         getContentPane().add(outFinalLabel);
 
-        outFinal2 = orangeBlock.combine(!out2, out3);
+        outFinal2 = orangeBlock.combine(out2, out3);
         outFinalLabel2 = new JLabel(returnFinalIcon2(outFinal2));
         outFinalLabel2.setBounds(790, 351, 30, 30);
         getContentPane().add(outFinalLabel2);
@@ -231,6 +242,13 @@ public class Level3 extends JFrame implements MouseListener {
 
 
         setVisible(true);
+
+        JOptionPane.showMessageDialog(null,"<html><body><p style='width: 400px;'>"+"Level 3 is similar to the level 2."
+                +" Here the error is fixed to star or circle at the output of the gate. The player need to place the"+
+                " suitable inputs to make corresponding to the errored output and the other inputs green and then play"
+                +" with the other inputs to fix the output as green. The success of immediate attempt will double the"+
+                " score and the failure will reduce the 10% of the score." +
+                "</p></body></html>","Instructions for Level 3", 1);
     }
 
 
@@ -246,13 +264,13 @@ public class Level3 extends JFrame implements MouseListener {
 
         if ( obj == in12Label){
             in12 = !in12;
-            in12Label.setIcon(returnIcon(in12));
+            in12Label.setIcon(returnFinalIcon(in12));
             setOutputIcons ();
         }
 
         if ( obj == in22Label){
             in22 = !in22;
-            in22Label.setIcon(returnIcon(in22));
+            in22Label.setIcon(returnFinalIcon(in22));
             setOutputIcons ();
         }
 
